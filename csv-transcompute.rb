@@ -7,20 +7,20 @@ require 'csv'
 require 'active_support'
 require 'pry'
 
-headers = %w{year site_no name category species order family unknown1 abundance unknown2
-                          unknown3 unknown4 unknown5 unknown6}
-count = headers.count
-
 begin
 raise StandardError, %Q{No filename, what CSV file to process?\nusage: make FILE="Below\\ South\\ Bend.csv"} \
   unless
 ( program  = ARGV[0],
   filename = ARGV[1]; filename.present?)
 
-csv = SmarterCSV.process('Below South Bend.csv',
-                         {headers_in_file: false,
-                          user_provided_headers: headers})
-junk_row = csv.pop
+above_headers = %w{year site_no name category species order family unknown1 abundance unknown2}
+above_csv = AboveCsv.new(user_headers: above_headers)
+
+below_headers = %w{year site_no name category species order family unknown1 abundance unknown2
+                          unknown3 unknown4 unknown5 unknown6}
+below_csv = BelowCsv.new(user_headers: below_headers)
+
+junk_row = below_csv.pop
 
 fixed_headers = [ 'site_name', 'year' ]
 all_species =
