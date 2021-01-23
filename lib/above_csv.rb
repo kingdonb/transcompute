@@ -2,9 +2,9 @@
 require './lib/my_csv'
 require 'forwardable'
 class AboveCsv < MyCsv
-  def initialize(filename: 'Above-South-Bend.csv',
+  def initialize(name, filename: 'Above-South-Bend.csv',
                  headers: true,
                  user_headers:)
-    super(filename: filename, headers: headers, user_headers: user_headers)
+    super(name, filename: filename, headers: headers, user_headers: user_headers)
   end
 end
