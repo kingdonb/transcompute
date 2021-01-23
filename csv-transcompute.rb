@@ -34,6 +34,6 @@ File.write('csv_output_below_order.csv', below_csv.order_csv)
 
 rescue StandardError => e
   puts e.message
- puts e.backtrace
+  puts e.backtrace
   Kernel.exit(1)
 end
