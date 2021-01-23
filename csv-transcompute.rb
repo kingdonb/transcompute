@@ -4,12 +4,18 @@ Bundler.setup
 require 'smarter_csv'
 require 'ostruct'
 require 'csv'
-
+require 'active_support'
 require 'pry'
 
 headers = %w{year site_no name category species order family unknown1 abundance unknown2
                           unknown3 unknown4 unknown5 unknown6}
 count = headers.count
+
+begin
+raise StandardError, %Q{No filename, what CSV file to process?\nusage: make FILE="Below\\ South\\ Bend.csv")} \
+  unless
+( program  = ARGV[0],
+  filename = ARGV[1]; filename.present?)
 
 csv = SmarterCSV.process('Below South Bend.csv',
                          {headers_in_file: false,
@@ -93,3 +99,7 @@ output = [final_csv_really, sorted_all_species]
 csv_output_txt = CSV.generate do |csv| final_csv_really.each {|row| csv << row}; end
 
 File.write('csv_output.csv', csv_output_txt)
+rescue StandardError => e
+  puts e.message
+  Kernel.exit(1)
+end
