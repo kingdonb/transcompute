@@ -12,7 +12,7 @@ headers = %w{year site_no name category species order family unknown1 abundance 
 count = headers.count
 
 begin
-raise StandardError, %Q{No filename, what CSV file to process?\nusage: make FILE="Below\\ South\\ Bend.csv")} \
+raise StandardError, %Q{No filename, what CSV file to process?\nusage: make FILE="Below\\ South\\ Bend.csv"} \
   unless
 ( program  = ARGV[0],
   filename = ARGV[1]; filename.present?)
