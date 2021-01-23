@@ -31,6 +31,8 @@ m = abundances = csv.map do |l|
   { header => abundance }
 end
 
+sample = []
+
 first_flattened_rows =
 abundances.map do |n|
 
@@ -39,6 +41,7 @@ abundances.map do |n|
   name = header_slug[0]
   year = header_slug[1]
   key = [name, year]
+  sample << key
   abundance = n[{species => [name, year]}]
 
   {species: species, name: name, year: year, abundance: abundance}
@@ -49,6 +52,17 @@ final_output = {}
 first_flattened_rows.map do |p|
   slice = [p[:name], p[:year], p[:species]]
   final_output[slice] = p[:abundance]
+end
+
+sample.map do |name_year|
+  all_species.map do |species|
+    name = name_year[0]
+    year = name_year[1]
+    slice = [name, year, species]
+    unless final_output.key? slice
+      final_output[slice] = 0
+    end
+  end
 end
 
 csv_output = { }
