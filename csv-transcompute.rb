@@ -79,8 +79,7 @@ final_output.map do |key, value|
   n = [*key, value]
   name = n[0]
   year = n[1]
-  # species = n[2]
-  order = n[3]
+  order = n[2]
   abundance = value
   row_slice = csv_output[[name, year]] ||= {}
 
