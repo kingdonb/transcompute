@@ -1,10 +1,8 @@
 .PHONY: clean all
 
-all: csv-transcompute.rb Above-South-Bend.csv Below-South-Bend.csv
-	bundle exec ruby ./csv-transcompute.rb Above-South-Bend.csv Below-South-Bend.csv
+all: csv-transcompute.rb FFG_analysis020521.csv
+	bundle exec ruby ./csv-transcompute.rb FFG_analysis020521.csv
 
 clean:
-	rm csv_output_above_species.csv
-	rm csv_output_above_order.csv
-	rm csv_output_below_species.csv
-	rm csv_output_below_order.csv
+	rm csv_output_gamma_family.csv
+	rm csv_output_gamma_feeding_guild.csv
