@@ -155,12 +155,13 @@ class MyCsv2
     end
 
     family_beta = family_alpha.map do |csv_row|
-      name = csv_row[0][0]
-      year = csv_row[0][1]
+      date = csv_row[0][0]
+      site_name = csv_row[0][1]
+      location = csv_row[0][2]
       rhs = csv_row[1]
       keys = rhs.keys.sort # sorted all_families
       values = keys.map {|k| rhs[k]}
-      [name, year, *values]
+      [date, site_name, location, *values]
     end
 
     feeding_guild_beta = feeding_guild_alpha.map do |csv_row|
