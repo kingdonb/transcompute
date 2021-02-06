@@ -65,9 +65,11 @@ class MyCsv2
       location = header_slug[2]
       key = [date, site_name, location]
       sample << key
-      abundance = n[{family_and_feeding_guild => [date, site_name]}]
+      abundance = n[{family_and_feeding_guild => [date, site_name, location]}]
 
-      {family_and_feeding_guild: family_and_feeding_guild, name: name, year: year, abundance: abundance}
+      {family_and_feeding_guild: family_and_feeding_guild,
+       site_name: site_name, date: date, location: location,
+       abundance: abundance}
     end
   end
 
@@ -77,14 +79,14 @@ class MyCsv2
 
     input.map do |key, value|
       n = [*key]
-      year     = n[0]
-      name     = n[1]
-      location = n[2]
-      family   = n[3]
+      date      = n[0]
+      site_name = n[1]
+      location  = n[2]
+      family    = n[3]
       feeding_guild   = n[5]
 
       abundance = value
-      row_slice = output[[name, year]] ||= {}
+      row_slice = output[[date, site_name]] ||= {}
 
       if feeding_guild.present?
         slug = "#{family},#{feeding_guild}"

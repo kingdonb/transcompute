@@ -1,7 +1,7 @@
 # frozen_string_literal: true
-require './lib/my_csv'
+require './lib/my_csv2'
 require 'forwardable'
-class GammaCsv < MyCsv
+class GammaCsv < MyCsv2
   def initialize(name, filename: 'FFG_analysis020521.csv',
                  headers: true,
                  user_headers:)
