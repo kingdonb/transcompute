@@ -23,7 +23,7 @@ raise StandardError, %Q{No filename, what CSV file to process?\nusage: make FILE
 #                           unknown3 unknown4 unknown5 unknown6}
 # below_csv = BelowCsv.new('below', filename: filename2, user_headers: below_headers)
 
-gamma_headers = %w{date site_name location family number feeding_guild}
+gamma_headers = %w{date site_name location family abundance feeding_guild}
 gamma_csv = GammaCsv.new('gamma', filename: filename, user_headers: gamma_headers)
 
 # junk_row = below_csv[:csv].pop

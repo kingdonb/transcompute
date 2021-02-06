@@ -50,7 +50,7 @@ class MyCsv2
         "#{family},#{feeding_guild}" => [date, site_name, location]
       }
 
-      abundance = l[:number]
+      abundance = l[:abundance]
       { header => abundance }
     end
   end
@@ -86,7 +86,7 @@ class MyCsv2
       feeding_guild   = n[5]
 
       abundance = value
-      row_slice = output[[date, site_name]] ||= {}
+      row_slice = output[[date, site_name, location]] ||= {}
 
       if feeding_guild.present?
         slug = "#{family},#{feeding_guild}"
@@ -117,19 +117,19 @@ class MyCsv2
   def process
     first_flattened_rows!.map do |p|
       family, feeding_guild = *p[:family_and_feeding_guild].split(',')
-      family_slice = [p[:date], p[:site_name], family]
-      feeding_guild_slice = [p[:date], p[:site_name], feeding_guild]
+      family_slice = [p[:date], p[:site_name], p[:location], family]
+      feeding_guild_slice = [p[:date], p[:site_name], p[:location], feeding_guild]
 
       if family_output[family_slice].present?
-        family_output[family_slice] += p[:number]
+        family_output[family_slice] += p[:abundance]
       else
-        family_output[family_slice] = p[:number]
+        family_output[family_slice] = p[:abundance]
       end
 
       if feeding_guild_output[feeding_guild_slice].present?
-        feeding_guild_output[feeding_guild_slice] += p[:number]
+        feeding_guild_output[feeding_guild_slice] += p[:abundance]
       else
-        feeding_guild_output[feeding_guild_slice] = p[:number]
+        feeding_guild_output[feeding_guild_slice] = p[:abundance]
       end
     end
 
@@ -164,7 +164,7 @@ class MyCsv2
     end
 
     feeding_guild_beta = feeding_guild_alpha.map do |csv_row|
-      year = csv_row[0][0]
+      date = csv_row[0][0]
       site_name = csv_row[0][1]
       location = csv_row[0][2]
       rhs = csv_row[1]
