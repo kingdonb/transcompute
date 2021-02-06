@@ -174,8 +174,8 @@ class MyCsv2
       [date, site_name, location, *values]
     end
 
-    family_beta.unshift ['name', 'date', *sorted_all_families]
-    feeding_guild_beta.unshift ['name', 'date', *sorted_all_feeding_guilds]
+    family_beta.unshift ['date', 'site_name', 'location', *sorted_all_families]
+    feeding_guild_beta.unshift ['date', 'site_name', 'location', *sorted_all_feeding_guilds]
 
     output = [family_beta, feeding_guild_beta, sorted_all_families, sorted_all_feeding_guilds]
     self[:csv_output_family_txt] =
